@@ -1,4 +1,5 @@
-const store={get:(k,d)=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d)),set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
+import { readStored, writeStored } from './services/storage.ts';
+const store={get:(k,d)=>readStored(k,d),set:(k,v)=>writeStored(k,v)};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const now=()=>new Date().toLocaleString();
 const uid=p=>`${p}-${crypto.getRandomValues(new Uint32Array(1))[0].toString(36)}`;
